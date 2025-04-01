@@ -3,5 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@": ["./src"],
+      "@icons": ["./src/assets/icons"],
+      "@images": ["./src/assets/images"]
+    }
+  }
 }

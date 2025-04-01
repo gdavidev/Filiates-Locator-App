@@ -1,10 +1,12 @@
 import './App.css'
-import BrazilMap from "./components/BrazilMap.tsx";
+import Header from "./components/layout/Header.tsx";
+import Footer from "./components/layout/Footer.tsx";
 
 export default function App() {
   return (
     <>
-      <BrazilMap />
+        <Header />
+        <Footer />
     </>
   )
 }

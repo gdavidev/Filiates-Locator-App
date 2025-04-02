@@ -1,0 +1,25 @@
+header {
+    position: fixed;
+    width: 100vw;
+    height: var(--header-height);
+    border-bottom: var(--border) solid 1px;
+}
+#header-spacing {
+    height: var(--header-height);
+}
+
+#header-logo {
+    position: fixed;
+    height: 6rem;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#header-previous-btn {
+    position: fixed;
+    background: none;
+    border: none;
+    outline: none;
+    top: 4rem;
+}

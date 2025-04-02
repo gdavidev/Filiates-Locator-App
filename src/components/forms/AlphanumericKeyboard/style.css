@@ -1,0 +1,16 @@
+.hg-theme-default .hg-button {
+    color: black;
+}
+
+.keyboard-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+.keyboard-container.shown {
+    transform: translate(0);
+}

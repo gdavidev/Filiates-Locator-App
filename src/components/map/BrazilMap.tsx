@@ -1,6 +1,6 @@
 import MapSectionPath from "./MapSectionPath.tsx";
 import {useCallback, useState} from "react";
-import mapPaths from "./map-paths.ts";
+import mapSegments from "./map-segments.ts";
 
 export default function BrazilMap() {
     const [selected, setSelected] = useState<string>('');
@@ -18,7 +18,7 @@ export default function BrazilMap() {
             stroke="white"
             stroke-width="1"
         >
-            {Object.values(mapPaths).map(((pathInfo, index) =>
+            {Object.values(mapSegments).map(((pathInfo, index) =>
                 <MapSectionPath
                     key={index}
                     path={pathInfo.path}

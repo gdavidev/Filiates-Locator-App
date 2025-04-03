@@ -1,48 +1,35 @@
-import {ChangeEvent, useCallback, useEffect, useRef, useState} from "react";
-import Header from "./components/layout/Header/Header.tsx";
-import Footer from "./components/layout/Footer/Footer.tsx";
-import DropDownSearch, {DropDownData} from "./components/forms/DropDownSearch/DropDownSearch.tsx";
-import mapSegments from "./components/map/map-segments.ts";
-import AlphanumericKeyboard from "./components/forms/AlphanumericKeyboard/AlphanumericKeyboard.tsx";
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
+import CityPickerView from "./views/CityPickerView/CityPickerView.tsx";
+import KeyboardContextProvider from "./context/KeyboardContextProvider.tsx";
+import ResellersView from "./views/ResellersView/ResellersView.tsx";
+import StatePickerView from "./views/StatePickerView/StatePickerView.tsx";
+import ChooseAppView from "./views/ChooseAppView/ChooseAppView.tsx";
+import FormView from "./views/FormView/FormView.tsx";
+import CatalogView from "./views/CatalogView/CatalogView.tsx";
 import './App.css'
 
-export default function App() {
-    const [keyboardShown, setKeyboardShown] = useState<boolean>(false);
-    const [citySearch, setCitySearch] = useState<string>("");
-    const keyboardRef = useRef<any>(null);
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <FormView />,
+    }, {
+        element: <Outlet />,
+        children: [
+            { path: "/choose", element: <ChooseAppView /> },
+            { path: "/state", element: <StatePickerView /> },
+            { path: "/city", element: <CityPickerView /> },
+            { path: "/resellers", element: <ResellersView /> }
+        ]
+    }, {
+        path: "/catalog",
+        element: <CatalogView />
+    }
+]);
 
-    useEffect(() => {
-        return () => setKeyboardShown(false);
-    }, []);
-
-    const handleInputChanged = useCallback((value: string) => {
-        keyboardRef.current && keyboardRef.current.setInput(value);
-        setCitySearch(value);
-    }, [keyboardRef, setCitySearch]);
-
+export default function Root() {
     return (
-        <>
-            <Header/>
-            <main>
-                <DropDownSearch
-                    search={citySearch}
-                    options={Object.entries(mapSegments).map(([key, value]) => ({
-                        name: key + ' - ' + value.title,
-                        value: key
-                    }))}
-                    onSelected={(data: DropDownData) => {
-                        handleInputChanged(data.name)
-                        setKeyboardShown(false);
-                    }}
-                    onInputChanged={(e: ChangeEvent<HTMLInputElement>) => handleInputChanged(e.target.value)}
-                    onClick={() => setKeyboardShown(true)}
-                />
-            </main>
-            <AlphanumericKeyboard
-                shown={keyboardShown}
-                keyboardRef={keyboardRef}
-                onChange={handleInputChanged} />
-            <Footer/>
-        </>
-    )
+        <KeyboardContextProvider>
+            <RouterProvider router={router} />
+        </KeyboardContextProvider>
+    );
 }

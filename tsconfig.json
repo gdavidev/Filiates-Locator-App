@@ -5,10 +5,13 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "@": ["./src"],
       "@icons": ["./src/assets/icons"],
-      "@images": ["./src/assets/images"]
+      "@images": ["./src/assets/images"],
+      "@hooks": ["./src/hooks"]
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }

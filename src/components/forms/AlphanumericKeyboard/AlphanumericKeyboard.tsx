@@ -3,8 +3,9 @@ import {RefObject, useState} from "react";
 import 'react-simple-keyboard/build/css/index.css';
 import './style.css';
 
-type AlphanumericKeyboardProps = {
-    onChange?: (input: string) => void;
+export type KeyboardChangedFunc = (input: string, e?: MouseEvent) => void;
+export type AlphanumericKeyboardProps = {
+    onChange?: KeyboardChangedFunc;
     keyboardRef?: RefObject<any>;
     shown: boolean;
 }
@@ -17,11 +18,11 @@ export default function AlphanumericKeyboard(props: AlphanumericKeyboardProps) {
             <Keyboard
                 onChange={props.onChange}
                 keyboardRef={ref => {
-                    props.keyboardRef && (props.keyboardRef.current = ref);
+                    if (props.keyboardRef)
+                        (props.keyboardRef.current = ref);
                 }}
                 layoutName={shiftEnabled ? "shift" : "default"}
                 onKeyPress={(button: string) => {
-                    console.log(button);
                     if (["{shift:on}", "{shift:off}"].includes(button))
                         setShiftEnabled(value => !value)
                 }}

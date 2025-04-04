@@ -1,8 +1,8 @@
-import './style.css'
-import DropDownSearch, {DropDownData} from "../../components/forms/DropDownSearch/DropDownSearch.tsx";
-import mapSegments from "../../components/map/map-segments.ts";
 import {ChangeEvent} from "react";
-import useKeyboard from "../../hooks/useKeyboard.ts";
+import DropDownSearch, {DropDownData} from "@components/forms/DropDownSearch/DropDownSearch.tsx";
+import mapSegments from "@components/map/map-segments.ts";
+import useKeyboard from "@hooks/useKeyboard.ts";
+import './style.css'
 
 export default function CityPickerView() {
     const { input, setInput, toggle: toggleKeyboard } = useKeyboard();

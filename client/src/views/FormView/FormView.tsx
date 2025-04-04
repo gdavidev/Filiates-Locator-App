@@ -1,6 +1,6 @@
-import './style.css'
 import {useNavigate} from "react-router-dom";
-import Footer from "../../components/layout/Footer/Footer.tsx";
+import Footer from "@components/layout/Footer/Footer.tsx";
+import './style.css'
 
 export default function FormView() {
     const navigate = useNavigate();

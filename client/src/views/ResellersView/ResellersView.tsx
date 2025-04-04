@@ -1,9 +1,9 @@
 import {useMemo} from "react";
-import useKeyboard from "../../hooks/useKeyboard.ts";
-import Header from "../../components/layout/Header/Header.tsx";
-import Footer from "../../components/layout/Footer/Footer.tsx";
-import {useLocation, useNavigate} from "react-router-dom";
-import './style.css'
+import useKeyboard from "@hooks/useKeyboard.ts";
+import Header from "@components/layout/Header/Header.tsx";
+import Footer from "@components/layout/Footer/Footer.tsx";
+import {useNavigate} from "react-router-dom";
+import './style.css';
 
 interface Company {
     name: string;

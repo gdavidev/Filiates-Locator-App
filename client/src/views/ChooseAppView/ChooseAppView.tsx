@@ -1,9 +1,9 @@
 import {useCallback, useState} from "react";
 import shop from '@icons/shop.svg'
 import catalog from '@icons/catalog.svg'
-import Footer from "../../components/layout/Footer/Footer.tsx";
+import Footer from "@components/layout/Footer/Footer.tsx";
+import Header from "@components/layout/Header/Header.tsx";
 import {useNavigate} from "react-router-dom";
-import Header from "../../components/layout/Header/Header.tsx";
 import './style.css'
 
 export default function ChooseAppView() {

@@ -5,13 +5,17 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
     "paths": {
       "@": ["./src"],
       "@icons": ["./src/assets/icons"],
       "@images": ["./src/assets/images"],
-      "@hooks": ["./src/hooks"]
+      "@hooks": ["./src/hooks"],
+      "@components": ["./src/components"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+  "include": ["./src/**/*.ts", "./src/**/*.d.ts"]
 }

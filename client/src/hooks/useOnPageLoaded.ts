@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-export default function useAfterLoaded(callback: () => void, deps: object[] = []) {
+export default function useOnPageLoaded(callback: () => void, deps: object[] = []) {
     useEffect(() => {
         if (document.readyState === 'complete') {
             callback();

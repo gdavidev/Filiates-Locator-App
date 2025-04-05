@@ -2,4 +2,6 @@ $ScriptPath = $PSScriptRoot  # Directory where the script is located
 
 Write-Host "-> Exporting users"
 Set-Location $ScriptPath\database\
-Start-Process -NoNewWindow -FilePath "node" -ArgumentList ".\src\exportToExcel.js"
+node .\src\exportToExcel.js
+
+Read-Host -Prompt "Precione enter para sair"

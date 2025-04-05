@@ -102,4 +102,4 @@ importToSqlite(
     'sqlite.db',
     'resellers',
     'Planilha1')
-    .then(() => console.log("Excel exported to sqlite at "));
+    .then();

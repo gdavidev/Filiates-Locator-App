@@ -21,13 +21,7 @@ class DataAccess {
         this.users = new UsersRepository(this.database);
         this.resellers = new ResellersRepository(this.database);
 
-        if (firstDatabaseCreation) {
-            this.database.serialize(() => {
-                this.ensureCreated();
-                this.seedDatabase();
-            });
-            console.log('Database created.');
-        }
+        this.ensureCreated();
         console.log('Connected to the SQLite database.');
     }
 

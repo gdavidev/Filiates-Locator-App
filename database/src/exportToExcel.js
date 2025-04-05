@@ -5,8 +5,7 @@ const os = require('os');
 
 async function exportSqliteToExcel(dbFile, tableName, fileName = 'userinfo_export.xlsx') {
     try {
-        const desktopPath = path.join(os.homedir(), 'Desktop');
-        const outputPath = path.join(desktopPath, fileName);
+        const outputPath = path.join(__dirname, "../../", fileName);
 
         // Connect to SQLite database
         const db = new sqlite3.Database(dbFile);
@@ -49,4 +48,7 @@ async function exportSqliteToExcel(dbFile, tableName, fileName = 'userinfo_expor
 }
 
 // Usage example
-await exportSqliteToExcel(path.join(__dirname, '../server/database/sqlite.db'), 'users');
+exportSqliteToExcel(
+    path.join(__dirname, '../../server/database/sqlite.db'),
+    'users')
+    .then();

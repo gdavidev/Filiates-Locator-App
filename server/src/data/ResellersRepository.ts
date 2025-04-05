@@ -95,7 +95,7 @@ export default class ResellersRepository implements IRepository<Reseller> {
                 document TEXT,
                 email TEXT,
                 phone TEXT,
-                address: Address,
+                address TEXT,
                 state TEXT,
                 address TEXT,
                 city TEXT,

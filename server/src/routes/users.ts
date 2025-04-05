@@ -9,7 +9,7 @@ type UserSaveRequest = {
         user: UserInfo;
     }
 };
-router.post('/api/users/save', async (req: UserSaveRequest, res) => {
+router.post('/users/save', async (req: UserSaveRequest, res) => {
     await dataAccess.users.save(req.body.user);
 
     res.status(204).send();

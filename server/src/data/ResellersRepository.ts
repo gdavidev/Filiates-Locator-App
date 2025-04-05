@@ -25,6 +25,20 @@ export default class ResellersRepository implements IRepository<Reseller> {
         throw new Error("Method not implemented.");
     }
 
+    getAllStates(): Promise<string[]> {
+        return new Promise((resolve, reject) => {
+            const stmt = this.db.prepare(`
+                SELECT DISTINCT state FROM resellers
+            `);
+            stmt.all(
+                (err: any, rows: { state: string}[]) => {
+                    if (err) return reject(err);
+                    resolve(rows.map(row => row.state));
+                });
+            stmt.finalize();
+        });
+    }
+
     getCitiesByState(state: string): Promise<string[]> {
         return new Promise((resolve, reject) => {
             const stmt = this.db.prepare(`
@@ -33,9 +47,9 @@ export default class ResellersRepository implements IRepository<Reseller> {
             `);
             stmt.all(
                 state,
-                (err: any, rows: string[]) => {
+                (err: any, rows: { city: string }[]) => {
                     if (err) return reject(err);
-                    resolve(rows);
+                    resolve(rows.map(row => row.city));
                 });
             stmt.finalize();
         });

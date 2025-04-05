@@ -12,6 +12,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/api', resellersRouter);
+app.use('/api', usersRouter);
+
 const apiProxy: RequestHandler<http.IncomingMessage, http.ServerResponse, NextFunction> =
     createProxyMiddleware({
       target: `http://localhost:${PORT}/api'`,
@@ -25,9 +28,6 @@ const viteProxy: RequestHandler<http.IncomingMessage, http.ServerResponse, NextF
     });
 app.use('/api', apiProxy);
 app.use(viteProxy);
-
-app.use('/api', resellersRouter);
-app.use('/api', usersRouter);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)

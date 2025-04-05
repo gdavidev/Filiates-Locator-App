@@ -17,14 +17,20 @@ body {
     overflow: hidden;
 }
 
+#return-btn {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+}
+
 /* Container principal */
-.container {
+.catalog-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 85vh; /* Usa 85% da tela */
+    height: 100vh;
 }
 
 /* Flipbook em tela cheia e responsivo */

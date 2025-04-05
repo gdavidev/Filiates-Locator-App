@@ -1,8 +1,8 @@
 import {useCallback, useState} from "react";
 import shop from '@icons/shop.svg'
 import catalog from '@icons/catalog.svg'
-import Footer from "@components/layout/Footer/Footer.tsx";
-import Header from "@components/layout/Header/Header.tsx";
+import Footer from "../../components/layout/Footer/Footer.tsx";
+import Header from "../../components/layout/Header/Header.tsx";
 import {useNavigate} from "react-router-dom";
 import './style.css'
 
@@ -11,9 +11,9 @@ export default function ChooseAppView() {
     const navigate = useNavigate();
 
     const handleNextPageClick = useCallback(() => {
-        const nextPage = selectedOption === 'resellers' ? '/state' : '/catalog';
+        const nextPage = selectedOption === 'resellers' ? '/city' : '/catalog';
         navigate(nextPage)
-    }, [navigate, selectedOption])
+    }, [navigate, selectedOption]);
 
     return (
         <>
@@ -26,7 +26,7 @@ export default function ChooseAppView() {
                         você ou visualizar nosso catálogo digital.
                     </p>
                 </div>
-                <div>
+                <div className="app-option-button-container">
                     <AppOptionButton
                         icon={shop}
                         text={"Busca de revendas"}
@@ -55,10 +55,13 @@ type AppOptionButtonProps = {
 
 function AppOptionButton(props: AppOptionButtonProps) {
     return (
-        <div className={"app-option-button" + props.selected ? " selected" : ""}>
-            <button className="app-option-button-img-container" onClick={props.onClick}>
+        <div
+            onClick={props.onClick}
+            className={"app-option-button" + (props.selected ? " selected" : "")}
+        >
+            <div className="app-option-img-container" >
                 <img className="app-option-button-img" src={props.icon} alt="Button icon" />
-            </button>
+            </div>
             <span className="app-option-button-text">{props.text}</span>
         </div>
     )

@@ -3,10 +3,12 @@ import HTMLFlipBook from "react-pageflip";
 import useDeviceWidth from "../../hooks/useDeviceWidth.ts";
 import {DeviceWidthBreakpoints} from "../../hooks/useDeviceWidth.ts";
 import './style.css'
+import {useNavigate} from "react-router-dom";
 
 const images = import.meta.glob("./pages/*");
 
 export default function CatalogView() {
+    const navigate = useNavigate();
     const [loadedImages, setLoadedImages] = useState<string[]>([])
     const book = useRef(null);
     const { breakpoint } = useDeviceWidth();
@@ -24,7 +26,11 @@ export default function CatalogView() {
     }, []);
 
     return (
-        <main>
+        <main className="catalog-container">
+            <button id="return-btn" onClick={() => navigate('/choose')}>
+                ⬅ Retornar
+            </button>
+
             <HTMLFlipBook
                 ref={book}
                 className="unselectable"

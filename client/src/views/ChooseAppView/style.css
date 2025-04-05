@@ -1,12 +1,59 @@
-.app-option-button {
-
+.app-option-button-container {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+    width: 100%;
+    padding: 0 2rem;
 }
-.app-option-button-img-container {
+.app-option-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    flex-shrink: 0;
+}
 
+.app-option-img-container {
+    aspect-ratio: 1;
+    padding: 3rem;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 1px solid var(--border);
 }
 .app-option-button-img {
-
+    width: 100%;
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(95%)
+        sepia(0%)
+        saturate(1%)
+        hue-rotate(139deg)
+        brightness(83%)
+        contrast(93%);
 }
-.app-option-button-text {
+.app-option-button.selected .app-option-img-container {
+    background-color: var(--primary);
+    outline: none;
+}
+.app-option-button.selected .app-option-button-img {
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(99%)
+        sepia(5%)
+        saturate(1354%)
+        hue-rotate(207deg)
+        brightness(121%)
+        contrast(100%);
+}
 
+.app-option-button-text {
+    text-wrap: nowrap;
 }

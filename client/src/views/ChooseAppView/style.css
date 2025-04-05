@@ -20,7 +20,7 @@
     aspect-ratio: 1;
     padding: 3rem;
     background-color: transparent;
-    border-radius: 0.25rem;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,4 +56,6 @@
 
 .app-option-button-text {
     text-wrap: nowrap;
+    margin-top: 1rem;
+    font-weight: bold;
 }

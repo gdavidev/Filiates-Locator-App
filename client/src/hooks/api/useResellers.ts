@@ -5,12 +5,12 @@ export default function useResellers() {
     const [resellers, setResellers] = useState<Reseller[]>([]);
 
     const fetchResellers = useCallback((state: string, city: string) => {
-        fetch("http://localhost:3000/api/resellers", {
-            method: "GET",
-            body: JSON.stringify({ state, city })
-        })
+        fetch("http://localhost:3000/api/resellers?" + new URLSearchParams({
+            "state": state,
+            "city": city,
+        }))
             .then(res => res.json())
-            .then(data => setResellers(data))
+            .then(data => setResellers(data.resellers))
     }, []);
 
     return {
@@ -19,16 +19,30 @@ export default function useResellers() {
     }
 }
 
-export function useResellersAvailableCities() {
+export function useResellersAllStates() {
+    const [states, setStates] = useState<string[]>([]);
+
+    const fetchStates = useCallback(() => {
+        fetch("http://localhost:3000/api/resellers/all-states")
+            .then(res => res.json())
+            .then(data => setStates(data.states.toSorted()))
+    }, []);
+
+    return {
+        states,
+        fetchStates,
+    }
+}
+
+export function useResellersCitiesByState() {
     const [cities, setCities] = useState<string[]>([]);
 
     const fetchCities = useCallback((state: string) => {
-        fetch("http://localhost:3000/api/resellers/available-cities", {
-            method: "GET",
-            body: JSON.stringify({ state })
-        })
+        fetch("http://localhost:3000/api/resellers/cities-by-state?" + new URLSearchParams({
+                "state": state,
+            }))
             .then(res => res.json())
-            .then(data => setCities(data))
+            .then(data => setCities(data.cities.toSorted()))
     }, []);
 
     return {

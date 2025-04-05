@@ -32,22 +32,6 @@
     height: 20vh;
 }
 
-.text-input {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 0.5rem;
-    background-color: transparent;
-}
-.text-input::placeholder { /* Firefox */
-    color: var(--input-placeholder);
-    opacity: 1;
-}
-.text-input::-ms-input-placeholder { /* Edge 12-18 */
-    color: var(--input-placeholder);
-}
-
 .form-item {
     width: 100%;
     flex-grow: 1;
@@ -73,6 +57,9 @@
     color: var(--text);
     font-size: 0.75rem;
     text-decoration: underline;
+}
+.check-box-item.has-error input[type="checkbox"]:not(:checked) {
+    border: 1px solid red;
 }
 
 input[type="checkbox"] {

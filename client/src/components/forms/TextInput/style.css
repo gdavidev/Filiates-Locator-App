@@ -1,0 +1,19 @@
+.text-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+}
+.text-input::placeholder { /* Firefox */
+    color: var(--input-placeholder);
+    opacity: 1;
+}
+.text-input::-ms-input-placeholder { /* Edge 12-18 */
+    color: var(--input-placeholder);
+}
+
+.text-input.has-error {
+    border: 1px solid red;
+}

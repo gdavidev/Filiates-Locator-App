@@ -4,4 +4,10 @@ footer {
     padding: 3rem 2rem;
     border-radius: 15px 15px 0 0;
     max-height: var(--footer-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer a {
+    max-width: var(--max-width);
 }

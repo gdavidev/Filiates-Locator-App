@@ -1,15 +1,13 @@
-import Button from "../../forms/Button/Button.tsx";
+import LinkButton, {LinkButtonProps} from "../../forms/LinkButton/LinkButton.tsx";
 import './style.css';
 
 type FooterProps = {
-    buttonText: string;
-    onNextClick?: () => void;
-}
+} & LinkButtonProps
 
 export default function Footer(props: FooterProps) {
     return (
         <footer>
-            <Button text={props.buttonText} onClick={props.onNextClick} />
+            <LinkButton text={props.text} to={props.to} data={props.data} onClick={props.onClick}  />
         </footer>
     );
 }

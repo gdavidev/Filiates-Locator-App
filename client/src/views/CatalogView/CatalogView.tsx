@@ -9,6 +9,7 @@ const images = import.meta.glob("./pages/*");
 
 export default function CatalogView() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [loadedImages, setLoadedImages] = useState<string[]>([])
     const book = useRef(null);
     const { breakpoint } = useDeviceWidth();
@@ -17,11 +18,13 @@ export default function CatalogView() {
         const loaders = Object.values(images)
         const loadersPromises = loaders.map(async loader => await loader());
 
+        setIsLoading(true);
         Promise.all(loadersPromises)
             .then(res => {
                 const paths = (res as { "default": string }[])
                     .map(r => r.default);
                 setLoadedImages(paths);
+                setIsLoading(false)
             });
     }, []);
 
@@ -31,40 +34,44 @@ export default function CatalogView() {
                 ⬅ Retornar
             </button>
 
-            <HTMLFlipBook
-                ref={book}
-                className="unselectable"
-                style={{}}
-                startPage={0}
-                size={"fixed"}
-                width={320}
-                height={460}
-                minWidth={320}
-                minHeight={460}
-                maxWidth={320}
-                maxHeight={460}
-                drawShadow={true}
-                flippingTime={300}
-                usePortrait={breakpoint < DeviceWidthBreakpoints.MD}
-                startZIndex={0}
-                autoSize={false}
-                maxShadowOpacity={0.3}
-                showCover={true}
-                mobileScrollSupport={true}
-                clickEventForward={false}
-                useMouseEvents={true}
-                swipeDistance={200}
-                showPageCorners={true}
-                disableFlipByClick={false}
-            >
-                {loadedImages.length > 0 &&
-                    loadedImages.map((image, index) => (
-                        <div key={index} className="page">
-                            <img src={image} alt={"Página " + index}/>
-                        </div>
-                    ))
-                }
-            </HTMLFlipBook>
+            {isLoading ? (
+                <span>Carregando...</span>
+            ) : (
+                <HTMLFlipBook
+                    ref={book}
+                    className="unselectable"
+                    style={{}}
+                    startPage={0}
+                    size={"fixed"}
+                    width={320}
+                    height={460}
+                    minWidth={320}
+                    minHeight={460}
+                    maxWidth={320}
+                    maxHeight={460}
+                    drawShadow={true}
+                    flippingTime={300}
+                    usePortrait={breakpoint < DeviceWidthBreakpoints.MD}
+                    startZIndex={0}
+                    autoSize={false}
+                    maxShadowOpacity={0.3}
+                    showCover={true}
+                    mobileScrollSupport={true}
+                    clickEventForward={false}
+                    useMouseEvents={true}
+                    swipeDistance={200}
+                    showPageCorners={true}
+                    disableFlipByClick={false}
+                >
+                    {loadedImages.length > 0 &&
+                        loadedImages.map((image, index) => (
+                            <div key={index} className="page">
+                                <img src={image} alt={"Página " + index}/>
+                            </div>
+                        ))
+                    }
+                </HTMLFlipBook>
+            )}
 
             <div className="controls">
                 <button id="prev" onClick={() => book.current && book.current.pageFlip().flipPrev()}>

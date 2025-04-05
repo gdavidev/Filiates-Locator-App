@@ -1,5 +1,6 @@
-.hg-theme-default .hg-button {
-    color: black;
+.hg-theme-default * {
+    color: var(--text-dark);
+    font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .keyboard-container {

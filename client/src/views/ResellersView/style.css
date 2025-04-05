@@ -1,7 +1,11 @@
 .container {
-    max-width: 400px;
+    max-width: var(--max-width);
     margin: auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .search-input {
@@ -20,12 +24,17 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.resellers-container {
+    max-height: 20rem;
+    overflow-y: scroll;
+}
+
+.reseller-info-icon-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    margin-top: .5rem;
+    font-size: .85rem;
 }

@@ -10,6 +10,7 @@ export type DropDownData = {
 type DropDownSearchProps = {
     search: string;
     options: DropDownData[];
+    error?: string;
     placeholder?: string;
     onSelected?: (data: DropDownData) => void;
     onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
@@ -53,7 +54,10 @@ const DropDownSearch = (
 
     return (
         <div ref={dropdownRef} className="drop-down-search">
-            <div ref={inputContainerRef} className='drop-down-search-input-container'>
+            <div
+                ref={inputContainerRef}
+                className={'drop-down-search-input-container' + (props.error === "true" ? ' has-error' : '') }
+            >
                 <img className='drop-down-search-icon' src={searchIcon} alt='search'/>
                 <input
                     type="text"

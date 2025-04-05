@@ -1,23 +1,16 @@
-import {useCallback, useState} from "react";
+import {useState} from "react";
 import shop from '@icons/shop.svg'
 import catalog from '@icons/catalog.svg'
 import Footer from "../../components/layout/Footer/Footer.tsx";
 import Header from "../../components/layout/Header/Header.tsx";
-import {useNavigate} from "react-router-dom";
 import './style.css'
 
 export default function ChooseAppView() {
     const [selectedOption, setSelectedOption] = useState<'resellers' | 'catalog'>('resellers');
-    const navigate = useNavigate();
-
-    const handleNextPageClick = useCallback(() => {
-        const nextPage = selectedOption === 'resellers' ? '/city' : '/catalog';
-        navigate(nextPage)
-    }, [navigate, selectedOption]);
 
     return (
         <>
-            <Header onPreviousClick={() => navigate(-1)} />
+            <Header />
             <main>
                 <div>
                     <h2>Encontre um Revendedor ou Explore Nosso Catálogo</h2>
@@ -41,7 +34,10 @@ export default function ChooseAppView() {
                     />
                 </div>
             </main>
-            <Footer buttonText="Avançar" onNextClick={handleNextPageClick}/>
+            <Footer
+                text="Avançar"
+                to={selectedOption === 'resellers' ? '/city' : '/catalog'}
+            />
         </>
     );
 }

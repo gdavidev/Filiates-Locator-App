@@ -12,7 +12,7 @@ export default function Header(props: HeaderProps) {
             <header>
                 <button
                     id='header-previous-btn'
-                    style={{ display: props.onPreviousClick ? 'none' : 'block' }}
+                    style={{ display: props.onPreviousClick ? 'block' : 'none' }}
                     onClick={props.onPreviousClick}
                 >
                     <img src={circleArrow} alt="previus page button"  />

@@ -4,17 +4,20 @@ const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
 
-async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilha1') {
+async function importToSqlite(excelFile, dbPath, dbFile, tableName, sheetName = 'Planilha1') {
     try {
         // Read Excel file
         const workbook = xlsx.readFile(path.join(__dirname, excelFile));
         const worksheet = workbook.Sheets[sheetName];
-        let data = xlsx.utils.sheet_to_json(worksheet, { raw: true });
+        let data = xlsx.utils.sheet_to_json(worksheet, {
+            raw: false,  // This will get values as strings
+            defval: ""   // Default empty string for missing values
+        });
 
         // Rename columns and add ID
         data = data.map((row, index) => ({
             id: index + 1,
-            group: row['GRUPO CLIENTE'],
+            groupName: row['GRUPO CLIENTE'],
             channel: row['CANAL'],
             document: row['CNPJ'],
             region: row['REGIÃO DO BRASIL'],
@@ -27,11 +30,13 @@ async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilh
             phone: row['TELEFONE']
         }));
 
+        // Creating directory
+        if (!fs.existsSync(path.join(__dirname, dbPath)))
+            fs.mkdirSync(path.join(__dirname, dbPath));
+
         // Connect to SQLite database
-        fs.mkdir(path.join(__dirname, dbFile), () => {
-            console.log('Creating database...');
-        });
-        const db = new sqlite3.Database(path.join(__dirname, dbFile));
+        console.log('Creating database...');
+        const db = new sqlite3.Database(path.join(__dirname, dbPath, "sqlite.db"));
 
         // Promisify db methods for async/await
         const dbRun = promisify(db.run.bind(db));
@@ -41,7 +46,7 @@ async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilh
         await dbExec(`
             CREATE TABLE IF NOT EXISTS ${tableName} (
                 id INTEGER PRIMARY KEY,
-                group TEXT,
+                groupName TEXT,
                 channel TEXT,
                 document TEXT,
                 region TEXT,
@@ -56,9 +61,10 @@ async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilh
         `);
 
         // Insert data
+        console.log('Inserting Data...');
         const insertStmt = await db.prepare(`
             INSERT INTO ${tableName} (
-                id, group, channel, document, region, state, city, 
+                id, groupName, channel, document, region, state, city, 
                 neighborhood, address, zip, email, phone
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
@@ -66,7 +72,7 @@ async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilh
         for (const row of data) {
             await promisify(insertStmt.run.bind(insertStmt))([
                 row.id,
-                row.group,
+                row.groupName,
                 row.channel,
                 row.document,
                 row.region,
@@ -83,17 +89,17 @@ async function importToSqlite(excelFile, dbFile, tableName, sheetName = 'Planilh
         await promisify(insertStmt.finalize.bind(insertStmt))();
         db.close();
 
-        console.log(`Successfully converted ${excelFile} to ${dbFile} (table: ${tableName})`);
+        console.log(`Successfully converted ${excelFile} to ${dbPath}/${dbFile} (table: ${tableName})`);
         console.log(`Processed ${data.length} records`);
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-// Usage example
 importToSqlite(
     '../base-clientes-feicon.xlsx',
-    '../server/database/sqlite.db',
+    '../../server/database',
+    'sqlite.db',
     'resellers',
     'Planilha1')
-    .then(() => console.log("Excel exported to sqlite at /server/database/sqlite.db"));
+    .then(() => console.log("Excel exported to sqlite at "));

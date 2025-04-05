@@ -39,5 +39,5 @@ class DataAccess {
     private seedDatabase() { }
 }
 
-const dataAccess = new DataAccess(path.join(__dirname, '../database/sqlite.db'));
+const dataAccess = new DataAccess(path.join(__dirname, '../../database/sqlite.db'));
 export default dataAccess;

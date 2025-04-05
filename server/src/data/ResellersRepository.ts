@@ -54,7 +54,7 @@ export default class ResellersRepository implements IRepository<Reseller> {
                     if (err) return reject(err);
                     resolve(rows.map(row => new Reseller(
                         row.id,
-                        row.group,
+                        row.groupName,
                         row.channel,
                         row.document,
                         row.email,
@@ -76,7 +76,7 @@ export default class ResellersRepository implements IRepository<Reseller> {
         const query = `
             CREATE TABLE IF NOT EXISTS resellers (
                 id INTEGER PRIMARY KEY,
-                group TEXT,
+                groupName TEXT,
                 channel TEXT,
                 document TEXT,
                 email TEXT,

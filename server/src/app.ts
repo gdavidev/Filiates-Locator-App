@@ -17,12 +17,12 @@ app.use('/api', usersRouter);
 
 const apiProxy: RequestHandler<http.IncomingMessage, http.ServerResponse, NextFunction> =
     createProxyMiddleware({
-      target: `http://191.252.102.230:${PORT}/api'`,
+      target: `http://localhost:${PORT}/api`,
       changeOrigin: true,
     });
 const viteProxy: RequestHandler<http.IncomingMessage, http.ServerResponse, NextFunction> =
     createProxyMiddleware({
-      target: 'http://191.252.102.230:5000',
+      target: 'http://localhost:5000',
       changeOrigin: true,
       ws: true,
     });

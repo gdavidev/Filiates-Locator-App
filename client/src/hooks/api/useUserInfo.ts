@@ -3,7 +3,7 @@ import UserInfo from "../../../../shared/models/UserInfo";
 
 export default function useSaveUserInfo() {
     return useCallback((user: UserInfo) => {
-        return fetch('http://localhost:3000/api/users/save', {
+        return fetch('http://191.252.102.230:3001/api/users/save', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

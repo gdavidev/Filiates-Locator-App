@@ -5,7 +5,7 @@ export default function useResellers() {
     const [resellers, setResellers] = useState<Reseller[]>([]);
 
     const fetchResellers = useCallback((state: string, city: string) => {
-        fetch("http://localhost:3000/api/resellers?" + new URLSearchParams({
+        fetch("http://191.252.102.230:3001/api/resellers?" + new URLSearchParams({
             "state": state,
             "city": city,
         }))
@@ -23,7 +23,7 @@ export function useResellersAllStates() {
     const [states, setStates] = useState<string[]>([]);
 
     const fetchStates = useCallback(() => {
-        fetch("http://localhost:3000/api/resellers/all-states")
+        fetch("http://191.252.102.230:3001/api/resellers/all-states")
             .then(res => res.json())
             .then(data => setStates(data.states.toSorted()))
     }, []);
@@ -38,7 +38,7 @@ export function useResellersCitiesByState() {
     const [cities, setCities] = useState<string[]>([]);
 
     const fetchCities = useCallback((state: string) => {
-        fetch("http://localhost:3000/api/resellers/cities-by-state?" + new URLSearchParams({
+        fetch("http://191.252.102.230:3001/api/resellers/cities-by-state?" + new URLSearchParams({
                 "state": state,
             }))
             .then(res => res.json())

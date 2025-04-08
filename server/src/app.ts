@@ -5,7 +5,7 @@ import { router as resellersRouter } from './routes/resellers';
 import { router as usersRouter } from './routes/users';
 import * as http from "node:http";
 
-const PORT: number = 3000;
+const PORT: number = 3001;
 const app: Express = express();
 
 app.use(logger('dev'));

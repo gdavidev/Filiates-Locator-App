@@ -1,4 +1,4 @@
-import {useLayoutEffect, useRef, useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import HTMLFlipBook from "react-pageflip";
 import useDeviceWidth from "../../hooks/useDeviceWidth.ts";
 import {DeviceWidthBreakpoints} from "../../hooks/useDeviceWidth.ts";
@@ -13,6 +13,24 @@ export default function CatalogView() {
     const [loadedImages, setLoadedImages] = useState<string[]>([])
     const book = useRef(null);
     const { breakpoint } = useDeviceWidth();
+
+    const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+    useEffect(() => {
+        const resetTimer = () => {
+            clearTimeout(timeoutRef.current)
+            timeoutRef.current = setTimeout(() => {
+                navigate("/")
+            }, 30000); // Retornar para a pagina principal após 30seg de inatividade
+        }
+        resetTimer();
+
+        document.body.addEventListener('click', resetTimer)
+        return () => {
+            clearTimeout(timeoutRef.current)
+            document.body.removeEventListener('click', resetTimer)
+        }
+    })
 
     useLayoutEffect(() => {
         const loaders = Object.values(images)

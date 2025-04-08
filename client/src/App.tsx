@@ -48,8 +48,11 @@ function App() {
         }
         resetTimer();
 
-        document.addEventListener('click', resetTimer)
-        return () => document.removeEventListener('click', resetTimer)
+        document.body.addEventListener('click', resetTimer)
+        return () => {
+            clearTimeout(timeoutRef.current)
+            document.body.removeEventListener('click', resetTimer)
+        }
     })
 
     return (

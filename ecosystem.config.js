@@ -1,7 +1,8 @@
 module.exports = {
     apps: [
         {
-            name: "full-app",
+            name: "resellers",
+            cwd: "/root/quiz/Resellers-Locator-App",
             script: "npm",
             args: "start",
             interpreter: "none",
